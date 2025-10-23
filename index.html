@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>QuackHub Healthcare - AI Medical Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="float-bg" aria-hidden="true">
+    <div class="particle p1"></div>
+    <div class="particle p2"></div>
+    <div class="particle p3"></div>
+    <div class="particle p4"></div>
+  </div>
+
+  <div class="container">
+    <!-- Header -->
+    <header class="top-header">
+      <div class="logo" role="banner" aria-label="QuackHub Healthcare logo">
+        <div class="mark">🦆</div>
+        <div class="logo-text">
+          <div class="title">QuackHub Healthcare</div>
+          <div class="sub">AI-Powered Medical Assistant</div>
+        </div>
+      </div>
+      <div class="team-tag">Quentin, Allen, and Vihaan</div>
+    </header>
+
+    <main class="grid" role="main">
+      <!-- Left Panel: Input Form -->
+      <section class="card left-card">
+        <h3>🩺 Symptoms & Patient Information</h3>
+
+        <form id="symptomForm">
+          <!-- Symptoms Input -->
+          <div class="symptom-block">
+            <label for="symptoms">Describe Your Symptoms</label>
+            <textarea
+              id="symptoms" 
+              name="symptoms" 
+              rows="4" 
+              placeholder="Example: headache, fever, sore throat..."
+              required
+            ></textarea>
+            <div class="help">Be as detailed as possible about what you're experiencing</div>
+          </div>
+
+          <!-- Patient Demographics -->
+          <div class="form-row">
+            <div class="small">
+              <label for="age">Age</label>
+              <input id="age" name="age" type="number" min="0" max="120" placeholder="e.g., 35" />
+            </div>
+            <div class="small">
+              <label for="sex">Sex</label>
+              <select id="sex" name="sex">
+                <option value="">Prefer not to say</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div class="small">
+              <label for="weight">Weight (lbs)</label>
+              <input id="weight" name="weight" type="number" min="0" placeholder="optional" />
+            </div>
+            <div class="small">
+              <label for="height">Height (inches)</label>
+              <input id="height" name="height" type="number" min="0" placeholder="optional" />
+            </div>
+          </div>
+
+          <!-- Duration and Severity -->
+          <div class="form-row">
+            <div style="flex: 2">
+              <label for="duration">Symptom Duration</label>
+              <select id="duration" name="duration">
+                <option value="">Select duration</option>
+                <option value="less_than_hour">Less than 1 hour</option>
+                <option value="few_hours">Few hours</option>
+                <option value="1_day">1 day</option>
+                <option value="few_days">2-3 days</option>
+                <option value="week">About a week</option>
+                <option value="weeks">Several weeks</option>
+                <option value="months">Months</option>
+              </select>
+            </div>
+            <div style="flex: 2">
+              <label for="severity">Pain/Discomfort Level (1-10)</label>
+              <input id="severity" name="severity" type="number" min="1" max="10" placeholder="1=mild, 10=severe" />
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="actions">
+            <button type="submit" class="btn" id="analyzeBtn">
+              🔬 Analyze with AI
+            </button>
+            <button type="button" class="btn secondary" id="resetBtn">
+              Reset
+            </button>
+            <button type="button" class="btn secondary" id="historyBtn">
+               View History
+            </button>
+          </div>
+
+          <!-- Disclaimer -->
+          <div class="help small-help">
+              <strong>Important:</strong> This is an AI-assisted tool for informational purposes only.
+            Always consult qualified healthcare professionals for medical advice, diagnosis, or treatment.
+          </div>
+        </form>
+      </section>
+
+      <!-- Right Panel: Results -->
+      <aside class="card right-col" aria-label="Results">
+        <div class="result-title">
+          <div>
+            <div class="muted-small">AI Analysis Results</div>
+            <div class="result-main">Diagnosis & Recommendations</div>
+          </div>
+          <div class="muted-small" id="lastUpdated">—</div>
+        </div>
+
+        <!-- Emergency Banner (Hidden by default) -->
+        <div id="emergencyBanner" class="danger hidden" role="alert">
+          <div class="danger-title">EMERGENCY CARE RECOMMENDED</div>
+          <div class="danger-sub">Seek immediate emergency medical attention</div>
+          <div class="emergency-actions">
+            <a href="tel:911" class="btn danger">📞 Call 911</a>
+            <button class="btn secondary" id="findERBtn">🏥 Find Nearest ER</button>
+          </div>
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loadingIndicator" class="loading hidden">
+          <div class="spinner"></div>
+          <span>Analyzing with AI...</span>
+        </div>
+
+        <!-- Results Box -->
+        <div id="resultBox" class="result-box" aria-live="polite">
+          <div class="result-section">
+            <h4>🩺 Analysis Results</h4>
+            <div id="diagnosis" class="result-text">
+              Click "Analyze with AI" to get started!
+              <br><br>
+              This AI-powered system will:
+              <ul>
+                <li>Analyze your symptoms</li>
+                <li>Suggest potential diagnoses</li>
+                <li>Recommend medications & dosages</li>
+                <li>Indicate if emergency care is needed</li>
+                <li>Provide specialist referral guidance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <footer class="note">
+           Your data is stored securely in MySQL & MongoDB
+          <br>
+           Powered by Google Gemini AI
+        </footer>
+      </aside>
+    </main>
+
+    <!-- Statistics Dashboard (Optional) -->
+    <section class="card stats-section" id="statsSection" style="display: none; margin-top: 24px;">
+      <h3>Usage Statistics</h3>
+      <div class="stats-grid" id="statsContent">
+        <!-- Stats will be populated here -->
+      </div>
+    </section>
+  </div>
+
+  <!-- JavaScript for Flask Integration -- Claude.ai CLUTCH-->
+  <script>
+    // API endpoint
+    const API_URL = window.location.origin;
+
+    // Form submission
+    document.getElementById('symptomForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Get form data
+      const formData = {
+        symptoms: document.getElementById('symptoms').value,
+        age: document.getElementById('age').value,
+        sex: document.getElementById('sex').value,
+        weight: document.getElementById('weight').value,
+        height: document.getElementById('height').value,
+        duration: document.getElementById('duration').value,
+        severity: document.getElementById('severity').value
+      };
+
+      // Show loading
+      document.getElementById('loadingIndicator').classList.remove('hidden');
+      document.getElementById('resultBox').style.opacity = '0.5';
+      document.getElementById('emergencyBanner').classList.add('hidden');
+
+      try {
+        // Call Flask API
+        const response = await fetch(`${API_URL}/analyze`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        // Hide loading
+        document.getElementById('loadingIndicator').classList.add('hidden');
+        document.getElementById('resultBox').style.opacity = '1';
+
+        if (result.success) {
+          // Display results
+          document.getElementById('diagnosis').innerHTML = result.diagnosis.replace(/\n/g, '<br>');
+          document.getElementById('lastUpdated').textContent = result.timestamp;
+
+          // Show emergency banner if needed
+          if (result.is_emergency) {
+            document.getElementById('emergencyBanner').classList.remove('hidden');
+          }
+        } else {
+          document.getElementById('diagnosis').innerHTML = `<span style="color: red;">Error: ${result.error}</span>`;
+        }
+      } catch (error) {
+        document.getElementById('loadingIndicator').classList.add('hidden');
+        document.getElementById('resultBox').style.opacity = '1';
+        document.getElementById('diagnosis').innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
+      }
+    });
+
+    // Reset button
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      document.getElementById('symptomForm').reset();
+      document.getElementById('diagnosis').innerHTML = 'Click "Analyze with AI" to get started! 🚀';
+      document.getElementById('lastUpdated').textContent = '—';
+      document.getElementById('emergencyBanner').classList.add('hidden');
+    });
+
+    // History button
+    document.getElementById('historyBtn').addEventListener('click', async () => {
+      try {
+        const response = await fetch(`${API_URL}/history`);
+        const data = await response.json();
+        
+        if (data.history && data.history.length > 0) {
+          let historyHTML = '<h4>Recent Queries</h4><ul>';
+          data.history.forEach(query => {
+            historyHTML += `<li><strong>${query.symptoms.substring(0, 50)}...</strong> (${query.timestamp}) ${query.is_emergency ? '🚨' : ''}</li>`;
+          });
+          historyHTML += '</ul>';
+          document.getElementById('diagnosis').innerHTML = historyHTML;
+        } else {
+          document.getElementById('diagnosis').innerHTML = 'No history found.';
+        }
+      } catch (error) {
+        alert('Error loading history: ' + error.message);
+      }
+    });
+
+    // Find ER button (uses geolocation)
+    document.getElementById('findERBtn').addEventListener('click', () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          // Open Google Maps with ER search
+          window.open(`https://www.google.com/maps/search/emergency+room/@${lat},${lng},15z`, '_blank');
+        }, () => {
+          alert('Unable to get your location. Please enable location services.');
+        });
+      } else {
+        window.open('https://www.google.com/maps/search/emergency+room', '_blank');
+      }
+    });
+  </script>
+</body>
+</html>
