@@ -1,4 +1,4 @@
-# QuackHub Healthcare 🦆🏥
+# QAAckHub Healthcare
 
 **AI-Powered Medical Assistant Built with Flask, MySQL & MongoDB**
 
