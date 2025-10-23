@@ -4,7 +4,7 @@
 
 Winner of **Best Beginner Project** at Steel Hacks XII (200+ participants)
 
-## 🚀 Project Overview
+##  Project Overview
 
 QuackHub Healthcare is an intelligent web application that analyzes patient symptoms, demographics, and severity levels to provide personalized medical recommendations using Google's Gemini AI. The system determines urgency, suggests medications with dosages, recommends specialist referrals, and alerts users to emergency situations.
 
@@ -20,7 +20,7 @@ QuackHub Healthcare is an intelligent web application that analyzes patient symp
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Backend**: Python 3.x, Flask
 - **Databases**: 
@@ -32,23 +32,7 @@ QuackHub Healthcare is an intelligent web application that analyzes patient symp
 
 ---
 
-## 📂 Project Structure
-
-```
-QuackHub-Healthcare/
-├── app.py                 # Main Flask application
-├── requirements.txt       # Python dependencies
-├── templates/
-│   └── index.html        # Main web interface
-├── static/
-│   └── css/
-│       └── styles.css    # Styling
-└── README.md             # This file
-```
-
----
-
-## 🔧 Installation & Setup
+## Installation & Setup
 
 ### Prerequisites
 
@@ -127,7 +111,7 @@ Visit: **http://localhost:5000**
 
 ---
 
-## 🎯 How It Works
+## How It Works
 
 ### 1. **User Input**
 - Symptoms description
@@ -155,7 +139,7 @@ Visit: **http://localhost:5000**
 
 ---
 
-## 🌐 API Endpoints
+## API Endpoints
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
@@ -167,7 +151,7 @@ Visit: **http://localhost:5000**
 
 ---
 
-## 📊 Database Schema
+## Database Schema
 
 ### MySQL: `user_query` Table
 
@@ -203,7 +187,7 @@ Visit: **http://localhost:5000**
 
 ---
 
-## 🏆 Hackathon Achievement
+## Hackathon Achievement
 
 **Steel Hacks XII - Best Beginner Project** (200+ participants)
 
@@ -223,9 +207,9 @@ Visit: **http://localhost:5000**
 
 ---
 
-## 🔐 Security Considerations
+## Security Considerations
 
-⚠️ **Important**: This is a hackathon project. For production use:
+**Important**: This is a hackathon project. For production use:
 
 1. **Never commit API keys** - Use environment variables
 2. **Secure database credentials** - Use `.env` files
@@ -235,7 +219,7 @@ Visit: **http://localhost:5000**
 
 ---
 
-## 🚀 Deployment
+## Deployment
 
 ### Deploy to Heroku
 
@@ -265,14 +249,14 @@ git push heroku main
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ![QuackHub Interface](screenshot.png)
 *AI-powered symptom analysis interface*
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 This was a hackathon project, but contributions are welcome!
 
@@ -284,7 +268,7 @@ This was a hackathon project, but contributions are welcome!
 
 ---
 
-## 📝 License
+## License
 
 MIT License - feel free to use this project for learning!
 
@@ -294,8 +278,8 @@ MIT License - feel free to use this project for learning!
 
 **Quentin Sharr**
 - GitHub: [@quentinsharr](https://github.com/quentinsharr)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
-- Email: your.email@example.com
+- LinkedIn: [Your LinkedIn](www.linkedin.com/in/quentinsharr)
+- Email: indrasharr@gmail.com
 
 Built at **Steel Hacks XII** - University of Pittsburgh  
 Team: Quentin, Allen, Vihaan
@@ -311,7 +295,7 @@ Team: Quentin, Allen, Vihaan
 
 ---
 
-## ⚠️ Medical Disclaimer
+## Medical Disclaimer
 
 **This application is for educational and informational purposes only.**
 
@@ -322,7 +306,7 @@ Team: Quentin, Allen, Vihaan
 
 ---
 
-## 🐛 Known Issues & Future Improvements
+## Known Issues & Future Improvements
 
 - [ ] Add user authentication
 - [ ] Implement symptom autocomplete
